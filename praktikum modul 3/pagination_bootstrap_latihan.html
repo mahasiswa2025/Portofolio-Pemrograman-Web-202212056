@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+  Nama: Yudha Achmad Muddatzir
+  NIM: 202212056
+  Program Studi: Teknik Informatika
+  Praktikum: Pemrograman Web - Modul 3 (Pagination - Latihan)
+-->
+<html lang="en">
+<head>
+  <title>Latihan Pagination - Latihan</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container mt-4">
+  <h2>Latihan Komponen Pagination</h2>
+  <p class="text-muted">Mencoba variasi ukuran, status aktif/non-aktif, serta penataan letak pagination.</p>
+  
+  <hr>
+
+  <!-- Pagination Besar, rata tengah, dan dengan active state -->
+  <div class="mb-4">
+    <h4>1. Large Pagination (Rata Tengah) dengan Active & Disabled State</h4>
+    <p>Menggunakan class <code>.pagination-lg</code> dan <code>.justify-content-center</code>.</p>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination pagination-lg justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <hr>
+
+  <!-- Pagination Kecil dan rata kanan -->
+  <div class="mb-4">
+    <h4>2. Small Pagination (Rata Kanan)</h4>
+    <p>Menggunakan class <code>.pagination-sm</code> dan <code>.justify-content-end</code>.</p>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination pagination-sm justify-content-end">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item active"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tugas Praktikum 3 - STITEK Digital Solutions</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Inter & Outfit -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <!-- Custom Styling -->
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --dark-navy: #0f172a;
+      --light-gray: #f8fafc;
+      --card-border: #e2e8f0;
+      --font-title: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--light-gray);
+      color: #334155;
+    }
+
+    h1, h2, h3, h4, h5, h6, .navbar-brand {
+      font-family: var(--font-title);
+    }
+
+    /* Navbar Customization */
+    .navbar {
+      background-color: var(--dark-navy) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+    }
+    
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+    
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary-color) !important;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 100px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -30%;
+      width: 100%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto 35px;
+    }
+
+    /* Table Section */
+    .section-title {
+      position: relative;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: var(--dark-navy);
+      text-transform: uppercase;
+      font-size: 1.75rem;
+      letter-spacing: 0.5px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background-color: var(--primary-color);
+      border-radius: 2px;
+    }
+
+    .section-title.center::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .info-table {
+      background-color: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--card-border);
+    }
+
+    .info-table table {
+      margin-bottom: 0;
+    }
+
+    .info-table th {
+      background-color: #f1f5f9;
+      color: var(--dark-navy);
+      font-weight: 600;
+      padding: 18px 24px;
+    }
+
+    .info-table td {
+      padding: 18px 24px;
+      vertical-align: middle;
+    }
+
+    /* Card Section & Layout */
+    .card-container {
+      margin-top: 50px;
+      margin-bottom: 80px;
+    }
+
+    .custom-card {
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      background-color: white;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      height: 100%;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    .custom-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-img-wrapper {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .custom-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .custom-card:hover .custom-card-img {
+      transform: scale(1.05);
+    }
+
+    .custom-card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      height: calc(100% - 220px);
+    }
+
+    .custom-card-title {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      color: var(--dark-navy);
+    }
+
+    .custom-card-text {
+      color: #64748b;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    /* Modern Buttons with Interactive Hover */
+    .btn-custom-primary {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .btn-custom-primary:hover {
+      background-color: var(--primary-hover);
+      color: white;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      transform: translateY(-1px);
+    }
+
+    /* Footer Section */
+    footer {
+      background-color: var(--dark-navy);
+      color: #94a3b8;
+      padding: 60px 0 30px;
+      border-top: 1px solid #1e293b;
+    }
+
+    footer h5 {
+      color: white;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .social-icons a {
+      color: #94a3b8;
+      font-size: 1.5rem;
+      margin-right: 15px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #1e293b;
+      padding-top: 20px;
+      margin-top: 40px;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <span class="text-primary me-1">&lt;</span>YU<span class="text-primary">MA/&gt;</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#companyNavbar" aria-controls="companyNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="companyNavbar">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="container">
+      <h1 class="hero-title">Pioneering Digital Excellence</h1>
+      <p class="hero-subtitle">Kami menyediakan solusi teknologi modern, pengembangan perangkat lunak khusus, dan layanan infrastruktur cloud berkelas untuk bisnis Anda.</p>
+      <a href="#services" class="btn btn-primary btn-lg px-4 py-2" style="border-radius: 8px; font-weight: 500;">Jelajahi Layanan</a>
+    </div>
+  </section>
+
+  <!-- About & Table Section -->
+  <section id="about" class="py-5 my-3">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <h2 class="section-title">Profil Perusahaan</h2>
+          <p class="lead">PT YUMA adalah mitra terpercaya transformasi teknologi Anda.</p>
+          <p>Sejak didirikan, kami berfokus membantu perusahaan bertransisi ke era digital melalui teknologi mutakhir yang handal, skalabel, dan efisien. Dengan tim ahli berpengalaman, kami berkomitmen memberikan solusi berkualitas tinggi demi pertumbuhan bisnis Anda.</p>
+        </div>
+        <div class="col-lg-6">
+          <!-- Tabel Informasi Perusahaan -->
+          <div class="info-table table-responsive">
+            <table class="table table-striped table-hover align-middle">
+              <thead>
+                <tr>
+                  <th colspan="2" class="text-center font-title py-3">Informasi Utama Perusahaan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-semibold">Nama Perusahaan</td>
+                  <td>PT YUMA</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Tahun Berdiri</td>
+                  <td>2030</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Lokasi Apartemen</td>
+                  <td>Jl. KH Dewantara No. 03, Bontang Selatan, Kalimantan Timur</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Jumlah Karyawan</td>
+                  <td>50+ Proplayer</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Sektor Industri</td>
+                  <td>Teknologi Informasi & Konsultan Software</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services & Cards Section -->
+  <section id="services" class="py-5 bg-white border-top border-bottom">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title center">Layanan Unggulan Kami</h2>
+        <p class="text-muted" style="max-width: 600px; margin: 15px auto 0;">Kami menawarkan solusi digital terintegrasi yang disesuaikan dengan kebutuhan transformasi bisnis Anda.</p>
+      </div>
+
+      <div class="row g-4 card-container mt-0 justify-content-center">
+        <!-- Card 1: Software Development -->
+        <div class="col-md-6 col-lg-4">
+          <div class="custom-card">
+            <div class="card-img-wrapper">
+              <img src="service_software.png" class="custom-card-img" alt="Custom Software Development">
+            </div>
+            <div class="custom-card-body">
+              <h4 class="custom-card-title">Software Development</h4>
+              <p class="custom-card-text">Pembuatan aplikasi web, mobile, dan sistem kustom yang dirancang khusus untuk mempermudah operasional dan bisnis internal perusahaan Anda.</p>
+              <a href="#" class="btn-custom-primary">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: IT Consulting -->
+        <div class="col-md-6 col-lg-4">
+          <div class="custom-card">
+            <div class="card-img-wrapper">
+              <img src="service_consulting.png" class="custom-card-img" alt="IT Consulting Services">
+            </div>
+            <div class="custom-card-body">
+              <h4 class="custom-card-title">IT Consulting</h4>
+              <p class="custom-card-text">Analisis mendalam, perencanaan arsitektur TI, serta audit keamanan data untuk meningkatkan performa bisnis dan meminimalisir risiko operasional.</p>
+              <a href="#" class="btn-custom-primary">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Cloud Infrastructure -->
+        <div class="col-md-6 col-lg-4">
+          <div class="custom-card">
+            <div class="card-img-wrapper">
+              <img src="service_cloud.png" class="custom-card-img" alt="Cloud Infrastructure Solutions">
+            </div>
+            <div class="custom-card-body">
+              <h4 class="custom-card-title">Cloud Infrastructure</h4>
+              <p class="custom-card-text">Migrasi, optimasi, dan pengelolaan infrastruktur server cloud handal yang menjamin sistem aplikasi Anda selalu aktif (high availability) dan aman.</p>
+              <a href="#" class="btn-custom-primary">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer id="contact">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5>STITEK Digital Solutions</h5>
+          <p class="small">Solusi teknologi modern, andal, dan skalabel untuk akselerasi pertumbuhan bisnis Anda di era digital.</p>
+          <div class="social-icons mt-3">
+            <a href="#" aria-label="Facebook">🌐</a>
+            <a href="#" aria-label="Twitter">🕊️</a>
+            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="GitHub">💻</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h5>Hubungi Kami</h5>
+          <ul class="footer-links">
+            <li>📍 Jl. KH. Dewantara No. 03, Bontang, Kaltim</li>
+            <li>✉️ yudhaachmad27gmail.com</li>
+            <li>📞 +62 (548) 123-4567</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Tautan Cepat</h5>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <p class="mb-0">&copy; 2030 PT YUMA Solutions. All rights reserved. | Dirancang oleh Yudha Achmad Muddatzir - 202212056</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 Bundle JS with Popper CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
