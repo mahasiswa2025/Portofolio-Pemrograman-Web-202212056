@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Praktikum CSS - Latihan 9</title>
+  <style>
+    /* Gaya Default untuk Desktop (Layar Lebar) */
+    body {
+      background-color: #dbeafe; /* Latar belakang biru untuk desktop (blue-100) */
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #1e3a8a;
+      transition: background-color 0.5s ease; /* Transisi halus saat warna latar belakang berubah */
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.1);
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* Teks dengan ukuran yang berubah sesuai ukuran layar */
+    .responsive-title {
+      font-size: 2.5rem; /* Ukuran besar untuk desktop */
+      font-weight: 800;
+      margin-top: 0;
+      margin-bottom: 10px;
+      transition: font-size 0.3s ease;
+      letter-spacing: -0.025em;
+    }
+
+    .responsive-desc {
+      font-size: 1.2rem; /* Ukuran menengah untuk desktop */
+      color: #475569;
+      margin-bottom: 30px;
+      transition: font-size 0.3s ease;
+    }
+
+    /* Grid Layout: 3 Kolom di Desktop */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .grid-item {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8); /* Gradien biru */
+      color: #ffffff;
+      padding: 30px 20px;
+      border-radius: 12px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(29, 78, 216, 0.15);
+      transition: transform 0.2s ease;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+
+    /* MEDIA QUERY untuk Layar Kecil / Smartphone (Maksimal 600px) */
+    @media only screen and (max-width: 600px) {
+      body {
+        background-color: #fee2e2; /* Latar belakang merah untuk smartphone (red-100) */
+        color: #7f1d1d; /* Teks berwarna merah gelap */
+        padding: 20px 10px;
+      }
+
+      .container {
+        box-shadow: 0 10px 15px -3px rgba(127, 29, 29, 0.1);
+      }
+
+      /* Mengubah ukuran teks sesuai ukuran layar smartphone */
+      .responsive-title {
+        font-size: 1.65rem; /* Ukuran lebih kecil untuk layar smartphone */
+      }
+
+      .responsive-desc {
+        font-size: 0.95rem; /* Ukuran lebih kecil untuk layar smartphone */
+      }
+
+      /* Mengubah grid menjadi 1 kolom sesuai instruksi */
+      .grid-container {
+        grid-template-columns: 1fr; /* 1 kolom */
+        gap: 12px;
+      }
+
+      .grid-item {
+        background: linear-gradient(135deg, #ef4444, #b91c1c); /* Gradien merah */
+        padding: 20px 15px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="responsive-title">Desain Responsif dengan Media Queries</h1>
+    <p class="responsive-desc">
+      Coba ubah ukuran lebar browser Anda (kecilkan hingga di bawah 600px) untuk melihat efek responsif dari media query.
+    </p>
+
+    <!-- Grid Container -->
+    <div class="grid-container">
+      <div class="grid-item">Kolom Grid A</div>
+      <div class="grid-item">Kolom Grid B</div>
+      <div class="grid-item">Kolom Grid C</div>
+    </div>
+
+    <div class="footer">
+      <strong>Praktikum:</strong> Yudha Achmad Muddatzir (202212056) <br>
+      Teknik Informatika - STITEK Bontang
+    </div>
+  </div>
+</body>
+</html>

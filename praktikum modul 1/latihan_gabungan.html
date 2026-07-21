@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Praktikum Pemrograman Web - Yudha Achmad Muddatzir | 202212056</title>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Prism.js Tomorrow Night Theme for Code Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+  <style>
+    /* Design System & Base Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-main: #0b0f19;
+      --bg-sidebar: #0f172a;
+      --bg-card: #151d30;
+      --bg-card-hover: #1e294b;
+      --border-color: rgba(255, 255, 255, 0.06);
+      --accent-blue: #3b82f6;
+      --accent-indigo: #6366f1;
+      --accent-purple: #8b5cf6;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --sidebar-width: 280px;
+      --transition-speed: 0.3s;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-main);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-indigo);
+    }
+
+    /* Layout Components */
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 100;
+      transition: transform var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-brand {
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    }
+
+    .sidebar-brand img {
+      width: 40px;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .brand-text h1 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      background: linear-gradient(to right, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text p {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .sidebar-profile {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .profile-avatar {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+    }
+
+    .profile-info {
+      overflow: hidden;
+    }
+
+    .profile-info h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .profile-info p {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .sidebar-menu {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .menu-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding: 0.5rem 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .menu-item:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+      color: var(--text-primary);
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.05) 100%);
+      color: var(--text-primary);
+      border-color: rgba(99, 102, 241, 0.2);
+      box-shadow: inset 3px 0 0 var(--accent-indigo);
+    }
+
+    .menu-badge {
+      margin-left: auto;
+      font-size: 0.65rem;
+      padding: 0.15rem 0.4rem;
+      background-color: #1e293b;
+      border-radius: 4px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .menu-item.active .menu-badge {
+      background-color: var(--accent-indigo);
+      color: #fff;
+    }
+
+    /* Main Workspace */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: margin-left var(--transition-speed) ease;
+    }
+
+    /* Header Nav */
+    .navbar {
+      height: 70px;
+      background-color: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .breadcrumbs span.separator {
+      color: var(--text-muted);
+    }
+
+    .breadcrumbs span.current {
+      color: var(--accent-blue);
+    }
+
+    .tech-stack {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .badge-tech {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      background-color: #1e293b;
+      border-radius: 6px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* Workspace Content Panel */
+    .workspace {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Banner & Intro Card */
+    .overview-hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      border: 1px solid rgba(99, 102, 241, 0.15);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .overview-hero::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      right: -50px;
+      top: -50px;
+      pointer-events: none;
+    }
+
+    .overview-hero h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(to right, #fff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .overview-hero p {
+      color: var(--text-secondary);
+      max-width: 700px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .overview-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .stat-card {
+      background-color: rgba(21, 29, 48, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .stat-card span.value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .stat-card span.label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Grid of exercises on Dashboard */
+    .exercises-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .grid-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .grid-card:hover {
+      background-color: var(--bg-card-hover);
+      border-color: rgba(99, 102, 241, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.15));
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      color: #93c5fd;
+    }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background-color: rgba(99, 102, 241, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-indigo);
+    }
+
+    .grid-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .grid-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-footer-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Interactive Frame & Editor Workspace */
+    .workspace-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .workspace-header h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .workspace-header p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Workspace Interface Tabs and Tools */
+    .workspace-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    .tabs-btn-group {
+      display: flex;
+      background-color: #0f172a;
+      padding: 0.25rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .tab-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      background: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tools-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tool-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .btn-responsive {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-card);
+      color: var(--text-secondary);
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .btn-responsive:hover,
+    .btn-responsive.active {
+      background-color: var(--accent-indigo);
+      color: #fff;
+      border-color: var(--accent-indigo);
+    }
+
+    .btn-copy {
+      padding: 0.5rem 0.9rem;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy:hover {
+      background-color: var(--bg-card-hover);
+      border-color: var(--text-secondary);
+    }
+
+    /* Workspace Content Panels */
+    .panels-container {
+      flex: 1;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      background-color: #0f172a;
+      min-height: 550px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Preview Panel */
+    .panel-preview {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      flex: 1;
+      padding: 1.5rem;
+      background: radial-gradient(circle at center, #151d30 0%, #0b0f19 100%);
+      overflow: auto;
+    }
+
+    .iframe-wrapper {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Chrome-style browser window header */
+    .browser-header {
+      background-color: #e2e8f0;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      gap: 0.5rem;
+      border-bottom: 1px solid #cbd5e1;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .browser-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .browser-dot.red {
+      background-color: #ef4444;
+    }
+
+    .browser-dot.yellow {
+      background-color: #f59e0b;
+    }
+
+    .browser-dot.green {
+      background-color: #10b981;
+    }
+
+    .browser-address {
+      flex: 1;
+      background-color: #ffffff;
+      height: 20px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      padding: 0 0.75rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .preview-iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+      background-color: #ffffff;
+    }
+
+    /* Screen Viewports */
+    .viewport-desktop {
+      width: 100%;
+    }
+
+    .viewport-tablet {
+      width: 768px;
+    }
+
+    .viewport-mobile {
+      width: 375px;
+    }
+
+    /* Source Code Panel */
+    .panel-code {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      background-color: #1b1e2e;
+      overflow: auto;
+    }
+
+    /* Code Editor Window Header */
+    .editor-header {
+      background-color: #131522;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .editor-tab {
+      background-color: #1b1e2e;
+      color: var(--text-primary);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 1.25rem;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      border-right: 1px solid rgba(255, 255, 255, 0.02);
+      border-top: 2px solid var(--accent-indigo);
+    }
+
+    .panel-code pre {
+      margin: 0 !important;
+      padding: 1.5rem !important;
+      background-color: transparent !important;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 0.85rem !important;
+      line-height: 1.6 !important;
+      flex: 1;
+      overflow: auto;
+    }
+
+    .panel-code code {
+      font-family: 'JetBrains Mono', monospace !important;
+    }
+
+    /* Hidden states */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Responsive Design Media Queries */
+    @media (max-width: 1024px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .hamburger-btn {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .workspace {
+        padding: 1rem;
+      }
+
+      .navbar {
+        padding: 0 1rem;
+      }
+
+      .overview-hero {
+        padding: 1.5rem;
+      }
+
+      .overview-hero h2 {
+        font-size: 1.5rem;
+      }
+
+      .tools-btn-group {
+        display: none;
+        /* Hide viewport tools on smaller screens */
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwHCh5-Qn3Z5ty0oMcIAOgDwVyFZRO0gPyysIXzct5jw&s=10"
+        alt="STITEK Logo">
+      <div class="brand-text">
+        <h1>STITEK BONTANG</h1>
+        <p>Pemrograman Web</p>
+      </div>
+    </div>
+
+    <div class="sidebar-profile">
+      <div class="profile-avatar">Y</div>
+      <div class="profile-info">
+        <h3 title="Yudha Achmad Muddatzir">Yudha Achmad M.</h3>
+        <p>Praktikan Modul 1</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-menu">
+      <div class="menu-item active" onclick="showSection('overview', this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
+          <path d="m8 3.293 6 6V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V9.293l6-6Z" />
+        </svg>
+        <span>Overview Dashboard</span>
+      </div>
+
+      <div class="menu-title">Tugas Latihan</div>
+
+      <div class="menu-item" onclick="loadLatihan('latihan1', this)">
+        <span class="menu-badge">01</span>
+        <span>Halaman Pertama</span>
+      </div>
+
+      <div class="menu-item" onclick="loadLatihan('latihan2', this)">
+        <span class="menu-badge">02</span>
+        <span>Elemen HTML Dasar</span>
+      </div>
+
+      <div class="menu-item" onclick="loadLatihan('latihan4', this)">
+        <span class="menu-badge">04</span>
+        <span>Atribut HTML</span>
+      </div>
+
+      <div class="menu-item" onclick="loadLatihan('latihan5', this)">
+        <span class="menu-badge">05</span>
+        <span>Format Teks</span>
+      </div>
+
+      <div class="menu-item" onclick="loadLatihan('latihan6', this)">
+        <span class="menu-badge">06</span>
+        <span>Link dan Gambar</span>
+      </div>
+
+      <div class="menu-item" onclick="loadLatihan('latihan7', this)">
+        <span class="menu-badge">07</span>
+        <span>Navigasi List</span>
+      </div>
+
+      <div class="menu-item" onclick="loadLatihan('latihan8', this)">
+        <span class="menu-badge">08</span>
+        <span>Tabel HTML</span>
+      </div>
+
+      <div class="menu-item" onclick="loadLatihan('latihan9', this)">
+        <span class="menu-badge">09</span>
+        <span>Formulir HTML</span>
+      </div>
+
+      <div class="menu-item" onclick="loadLatihan('latihan10', this)">
+        <span class="menu-badge">10</span>
+        <span>Multimedia</span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Workspace -->
+  <main class="main-content">
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+      <div class="navbar-left">
+        <button class="hamburger-btn" onclick="toggleSidebar()">☰</button>
+        <div class="breadcrumbs" id="breadcrumbs">
+          <span class="root">Dashboard</span>
+          <span class="separator">&gt;</span>
+          <span class="current">Overview</span>
+        </div>
+      </div>
+
+      <div class="tech-stack">
+        <div class="badge-tech">
+          <span style="color: #e34c26;">⬤</span> HTML5
+        </div>
+        <div class="badge-tech">
+          <span style="color: #264de4;">⬤</span> CSS3
+        </div>
+        <div class="badge-tech">
+          <span style="color: #f7df1e;">⬤</span> Vanilla JS
+        </div>
+      </div>
+    </header>
+
+    <!-- Workspace Area -->
+    <div class="workspace">
+
+      <!-- SECTION 1: OVERVIEW DASHBOARD (Default view) -->
+      <div id="overview-section" class="section-container">
+
+        <!-- Welcome Hero Banner -->
+        <div class="overview-hero">
+          <h2>Portal Penggabungan Tugas Praktikum</h2>
+          <p>
+            Selamat datang di Portal Penggabungan Latihan 1 sampai 10. File ini dikhususkan sebagai antarmuka tunggal
+            terpadu untuk mengecek, menguji, dan menampilkan hasil tugas latihan praktikum secara interaktif tanpa
+            merusak atau mengubah struktur file aslinya.
+          </p>
+
+          <div class="overview-stats">
+            <div class="stat-card">
+              <span class="value">9</span>
+              <span class="label">Total Latihan</span>
+            </div>
+            <div class="stat-card">
+              <span class="value">100%</span>
+              <span class="label">Penyelesaian</span>
+            </div>
+            <div class="stat-card">
+              <span class="value">Responsive</span>
+              <span class="label">Mode Pratinjau</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin: 2rem 0 1rem; font-weight: 700; font-size: 1.25rem;">Daftar Tugas Latihan</h3>
+
+        <!-- Grid of Exercises -->
+        <div class="exercises-grid">
+
+          <!-- Card 1 -->
+          <div class="grid-card"
+            onclick="loadLatihan('latihan1', document.querySelectorAll('.sidebar-menu .menu-item')[1])">
+            <div class="card-header">
+              <span class="card-badge">Latihan 1</span>
+              <div class="card-icon">🏠</div>
+            </div>
+            <h3>Halaman Pertama Saya</h3>
+            <p>Membuat kerangka standar struktur dokumen HTML pertama dengan tag judul h1 dan paragraf.</p>
+            <div class="card-footer-link">Buka Latihan →</div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="grid-card"
+            onclick="loadLatihan('latihan2', document.querySelectorAll('.sidebar-menu .menu-item')[2])">
+            <div class="card-header">
+              <span class="card-badge">Latihan 2</span>
+              <div class="card-icon">📝</div>
+            </div>
+            <h3>Elemen HTML Dasar</h3>
+            <p>Mempelajari penggunaan teks heading, paragraf link aktif ke stitek, penyematan gambar, dan daftar ul.</p>
+            <div class="card-footer-link">Buka Latihan →</div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="grid-card"
+            onclick="loadLatihan('latihan4', document.querySelectorAll('.sidebar-menu .menu-item')[3])">
+            <div class="card-header">
+              <span class="card-badge">Latihan 4</span>
+              <div class="card-icon">🏷️</div>
+            </div>
+            <h3>Atribut HTML</h3>
+            <p>Eksplorasi atribut dasar HTML seperti href dan title pada link, serta src dan alt pada media gambar.</p>
+            <div class="card-footer-link">Buka Latihan →</div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="grid-card"
+            onclick="loadLatihan('latihan5', document.querySelectorAll('.sidebar-menu .menu-item')[4])">
+            <div class="card-header">
+              <span class="card-badge">Latihan 5</span>
+              <div class="card-icon">🔠</div>
+            </div>
+            <h3>Format Teks</h3>
+            <p>Mengaplikasikan gaya format teks tebal (bold/strong), miring (italic), dan garis bawah (underline).</p>
+            <div class="card-footer-link">Buka Latihan →</div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="grid-card"
+            onclick="loadLatihan('latihan6', document.querySelectorAll('.sidebar-menu .menu-item')[5])">
+            <div class="card-header">
+              <span class="card-badge">Latihan 6</span>
+              <div class="card-icon">🔗</div>
+            </div>
+            <h3>Link dan Gambar</h3>
+            <p>Membuat tautan teks luar kampus Stitek beserta penyematan file logo eksternal secara bersamaan.</p>
+            <div class="card-footer-link">Buka Latihan →</div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="grid-card"
+            onclick="loadLatihan('latihan7', document.querySelectorAll('.sidebar-menu .menu-item')[6])">
+            <div class="card-header">
+              <span class="card-badge">Latihan 7</span>
+              <div class="card-icon">🗂️</div>
+            </div>
+            <h3>Navigasi List</h3>
+            <p>Penyusunan link navigasi antar-file tugas menggunakan list berurutan (ol), list tak berurut (ul), dan dl.
+            </p>
+            <div class="card-footer-link">Buka Latihan →</div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="grid-card"
+            onclick="loadLatihan('latihan8', document.querySelectorAll('.sidebar-menu .menu-item')[7])">
+            <div class="card-header">
+              <span class="card-badge">Latihan 8</span>
+              <div class="card-icon">📊</div>
+            </div>
+            <h3>Tabel HTML</h3>
+            <p>Membuat layout tabel data bergaris (border) yang memuat daftar nama beserta umur secara rapi.</p>
+            <div class="card-footer-link">Buka Latihan →</div>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="grid-card"
+            onclick="loadLatihan('latihan9', document.querySelectorAll('.sidebar-menu .menu-item')[8])">
+            <div class="card-header">
+              <span class="card-badge">Latihan 9</span>
+              <div class="card-icon">📥</div>
+            </div>
+            <h3>Formulir HTML</h3>
+            <p>Membuat form inputan data sederhana yang terdiri atas kolom Nama, Email, dan tombol Kirim (submit).</p>
+            <div class="card-footer-link">Buka Latihan →</div>
+          </div>
+
+          <!-- Card 10 -->
+          <div class="grid-card"
+            onclick="loadLatihan('latihan10', document.querySelectorAll('.sidebar-menu .menu-item')[9])">
+            <div class="card-header">
+              <span class="card-badge">Latihan 10</span>
+              <div class="card-icon">🎥</div>
+            </div>
+            <h3>Multimedia</h3>
+            <p>Integrasi pemutar audio (audio controls) dan pemutar video (video controls) lokal ke dalam halaman web.
+            </p>
+            <div class="card-footer-link">Buka Latihan →</div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- SECTION 2: EXERCISE VIEWER (Dynamic) -->
+      <div id="viewer-section" class="section-container hidden">
+
+        <!-- Exercise Info Panel -->
+        <div class="workspace-header">
+          <h2 id="ex-title">Latihan X</h2>
+          <p id="ex-desc">Penjelasan mengenai latihan ini.</p>
+        </div>
+
+        <!-- Controls Toolbar -->
+        <div class="workspace-controls">
+
+          <!-- Mode Tabs -->
+          <div class="tabs-btn-group">
+            <button class="tab-btn active" id="btn-tab-preview" onclick="switchTab('preview')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                <path
+                  d="M0 8s3-5.5 8-5.5 8 5.5 8 5.5-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+              </svg>
+              Pratinjau Live
+            </button>
+            <button class="tab-btn" id="btn-tab-code" onclick="switchTab('code')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                  d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z" />
+              </svg>
+              Kode Sumber
+            </button>
+          </div>
+
+          <!-- Contextual Toolbar -->
+          <div class="tools-btn-group">
+
+            <!-- Resizer (Only in Preview) -->
+            <div id="preview-tools" class="tools-btn-group">
+              <span class="tool-label">Ukuran Layar:</span>
+              <button class="btn-responsive active" title="Desktop View"
+                onclick="changeViewport('desktop', this)">🖥️</button>
+              <button class="btn-responsive" title="Tablet View" onclick="changeViewport('tablet', this)">📱</button>
+              <button class="btn-responsive" title="Mobile View" onclick="changeViewport('mobile', this)">📲</button>
+            </div>
+
+            <!-- Copy button (Only in Code view) -->
+            <div id="code-tools" class="tools-btn-group hidden">
+              <button class="btn-copy" onclick="copySourceCode()">
+                <span id="copy-icon">📋</span>
+                <span id="copy-text">Salin Kode</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Render Panels -->
+        <div class="panels-container">
+
+          <!-- Live Preview IFrame -->
+          <div class="panel-preview" id="panel-preview">
+            <div class="iframe-wrapper viewport-desktop" id="iframe-wrapper">
+              <div class="browser-header">
+                <div class="browser-dots">
+                  <div class="browser-dot red"></div>
+                  <div class="browser-dot yellow"></div>
+                  <div class="browser-dot green"></div>
+                </div>
+                <div class="browser-address" id="browser-address-bar">http://localhost/latihan1.html</div>
+              </div>
+              <iframe id="preview-iframe" class="preview-iframe" src="about:blank"></iframe>
+            </div>
+          </div>
+
+          <!-- Code Viewer -->
+          <div class="panel-code" id="panel-code">
+            <div class="editor-header">
+              <div class="editor-tab" id="editor-tab-title">latihan1.html</div>
+              <div class="browser-dots" style="margin-right: 0.5rem;">
+                <span style="color: var(--text-muted); font-size: 0.7rem;">HTML5 mode</span>
+              </div>
+            </div>
+            <pre><code class="language-html" id="code-block"></code></pre>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- JavaScript logic to hold exercise source code and manage interactions -->
+  <script>
+    // Database containing the exact source code and metadata of the exercises
+    const latihanData = {
+      latihan1: {
+        title: "Latihan 1: Halaman Pertama Saya",
+        file: "latihan1.html",
+        desc: "Latihan dasar pertama membuat struktur dokumen HTML, menggunakan tag heading <code>&lt;h1&gt;</code> dan paragraf <code>&lt;p&gt;</code>.",
+        code: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Halaman Pertama Saya</title>
+</head>
+<body>
+    <h1>Halo, Saya Yudha Achmad Muddatzir!</h1>
+    <p>Ini adalah paragraf pertama saya.</p>
+</body>
+</html>`
+      },
+      latihan2: {
+        title: "Latihan 2: Elemen HTML Dasar",
+        file: "latihan2.html",
+        desc: "Latihan menggunakan elemen-elemen dasar HTML seperti heading <code>&lt;h2&gt;</code>, tautan (anchor) <code>&lt;a&gt;</code>, gambar <code>&lt;img&gt;</code>, dan daftar tidak terurut (unordered list) <code>&lt;ul&gt;</code>.",
+        code: `<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Elemen HTML Dasar</title>
+</head>
+
+<body>
+    <h2>Kampus Utama STITEK Bontang</h2>
+    <p>Ini adalah paragraf dengan <a href="https://stitek.ac.id/">link ke website stitek</a></p>
+    <img src="https://s3.ap-southeast-1.amazonaws.com/maukuliah/gallery/113056/1706666932-HhAqE9dEsv-thumbnail.jpg"
+        alt="Stitek Bontang">
+    <ul>
+        <li>Item pertama</li>
+        <li>Item kedua</li>
+    </ul>
+</body>
+
+</html>`
+      },
+      latihan4: {
+        title: "Latihan 4: Atribut HTML",
+        file: "latihan4.html",
+        desc: "Mempelajari penggunaan atribut penting pada HTML seperti <code>href</code>, <code>title</code>, dan <code>src</code> untuk tautan dan media gambar.",
+        code: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Atribut HTML</title>
+</head>
+<body>
+    <a href="https://stitek.ac.id/" title="Pergi ke stitek">STITEK</a>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwHCh5-Qn3Z5ty0oMcIAOgDwVyFZRO0gPyysIXzct5jw&s=10" alt="Logo Kampus" title="Logo">
+</body>
+</html>`
+      },
+      latihan5: {
+        title: "Latihan 5: Format Teks",
+        file: "latihan5.html",
+        desc: "Menggunakan tag pemformatan teks seperti <code>&lt;b&gt;</code> (bold), <code>&lt;i&gt;</code> (italic), <code>&lt;u&gt;</code> (underline), serta <code>&lt;strong&gt;</code> untuk memberikan penekanan penting pada teks.",
+        code: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Format Teks</title>
+</head>
+<body>
+    <p>Ini adalah teks <b>tebal</b>, <i>miring</i>, dan <u>garis bawah</u>.</p>
+    <p><strong>Penting!</strong> Ini adalah teks penting.</p>
+</body>
+</html>`
+      },
+      latihan6: {
+        title: "Latihan 6: Link dan Gambar",
+        file: "latihan6.html",
+        desc: "Praktik lanjutan dalam menyisipkan gambar eksternal dan menghubungkannya dengan tautan aktif ke situs eksternal.",
+        code: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Link dan Gambar</title>
+</head>
+<body>
+    <a href="https://stitek.ac.id/">Kampus Stitek</a>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwHCh5-Qn3Z5ty0oMcIAOgDwVyFZRO0gPyysIXzct5jw&s=10" alt="Foto stitek">
+</body>
+</html>`
+      },
+      latihan7: {
+        title: "Latihan 7: Navigasi List",
+        file: "latihan7.html",
+        desc: "Menghubungkan berbagai halaman latihan lokal (seperti <code>latihan10.html</code>, <code>latihan9.html</code>, dan <code>latihan2.html</code>) menggunakan daftar terurut (ordered list <code>&lt;ol&gt;</code>), daftar tidak terurut (<code>&lt;ul&gt;</code>), dan daftar definisi (<code>&lt;dl&gt;</code>).",
+        code: `<a href="latihan10.html">
+    <ol>
+        <li>TEKAN UNTUK KE HALAMAN Multimedia</li>
+    </ol>
+</a>
+<a href="latihan9.html">
+    <ul>
+        <li>TEKAN UNTUK KE HALAMAN Formulir</li>
+    </ul>
+</a>
+<a href="latihan2.html">
+    <dl>
+        <dd>TENTANG STITEK BONTANG.</dd>
+    </dl>
+</a>`
+      },
+      latihan8: {
+        title: "Latihan 8: Tabel HTML",
+        file: "latihan8.html",
+        desc: "Membuat tabel terstruktur sederhana menggunakan elemen <code>&lt;table&gt;</code>, baris tabel <code>&lt;tr&gt;</code>, header tabel <code>&lt;th&gt;</code>, dan sel data <code>&lt;td&gt;</code>.",
+        code: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Tabel HTML</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>Nama</th>
+            <th>Umur</th>
+        </tr>
+        <tr>
+            <td>Yudha</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>Achmad</td>
+            <td>17</td>
+        </tr>
+    </table>
+</body>
+</html>`
+      },
+      latihan9: {
+        title: "Latihan 9: Formulir HTML",
+        file: "latihan9.html",
+        desc: "Membuat formulir input dasar dengan input nama (teks), input email, dan tombol kirim (submit) menggunakan elemen <code>&lt;form&gt;</code>.",
+        code: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulir HTML</title>
+</head>
+<body>
+    <form action="/submit" method="post">
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" name="nama"><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        
+        <input type="submit" value="Kirim">
+    </form>
+</body>
+</html>`
+      },
+      latihan10: {
+        title: "Latihan 10: Multimedia",
+        file: "latihan10.html",
+        desc: "Menyematkan pemutar media video (<code>&lt;video&gt;</code>) dan audio (<code>&lt;audio&gt;</code>) menggunakan kontrol bawaan HTML5.",
+        code: `<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Multimedia</title>
+</head>
+
+<body>
+  <video width="320" height="240" controls>
+    <source src="perekamlayar.mp4" type="video/mp4">
+    Browser Anda tidak mendukung tag video.
+  </video>
+
+  <audio controls>
+    <source src="audio.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung tag audio.
+  </audio>
+</body>
+
+</html>`
+      }
+    };
+
+    let activeLatihanKey = '';
+    let currentTab = 'preview';
+
+    // Toggle Mobile Sidebar
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('open');
+    }
+
+    // Switch between Main Sections (Overview vs Viewer)
+    function showSection(section, element) {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.remove('open'); // Close on click for mobile
+
+      // Reset active status in sidebar
+      document.querySelectorAll('.sidebar-menu .menu-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      element.classList.add('active');
+
+      const overviewSection = document.getElementById('overview-section');
+      const viewerSection = document.getElementById('viewer-section');
+      const breadcrumbsCurrent = document.querySelector('.breadcrumbs .current');
+
+      if (section === 'overview') {
+        overviewSection.classList.remove('hidden');
+        viewerSection.classList.add('hidden');
+        breadcrumbsCurrent.textContent = 'Overview';
+        activeLatihanKey = '';
+        document.getElementById('preview-iframe').src = 'about:blank';
+      }
+    }
+
+    // Load selected Latihan exercise
+    function loadLatihan(key, element) {
+      activeLatihanKey = key;
+      const data = latihanData[key];
+      if (!data) return;
+
+      // Close sidebar on mobile
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.remove('open');
+
+      // Set sidebar active
+      document.querySelectorAll('.sidebar-menu .menu-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      element.classList.add('active');
+
+      // Update visibility of sections
+      document.getElementById('overview-section').classList.add('hidden');
+      document.getElementById('viewer-section').classList.remove('hidden');
+
+      // Update breadcrumbs
+      document.querySelector('.breadcrumbs .current').textContent = data.file;
+
+      // Update title & description
+      document.getElementById('ex-title').textContent = data.title;
+      document.getElementById('ex-desc').innerHTML = data.desc;
+
+      // Update tab contents
+      document.getElementById('editor-tab-title').textContent = data.file;
+
+      const codeBlock = document.getElementById('code-block');
+      codeBlock.textContent = data.code;
+
+      // Re-trigger syntax highlighting via Prism
+      if (window.Prism) {
+        Prism.highlightElement(codeBlock);
+      }
+
+      // Update address bar inside simulated browser window
+      document.getElementById('browser-address-bar').textContent = `http://localhost/${data.file}`;
+
+      // Update iframe source
+      document.getElementById('preview-iframe').src = data.file;
+
+      // Reset tabs & viewport
+      switchTab('preview');
+      changeViewport('desktop', document.querySelector('.btn-responsive[title="Desktop View"]'));
+    }
+
+    // Switch between Preview and Code tabs
+    function switchTab(tab) {
+      currentTab = tab;
+      const btnPreview = document.getElementById('btn-tab-preview');
+      const btnCode = document.getElementById('btn-tab-code');
+      const panelPreview = document.getElementById('panel-preview');
+      const panelCode = document.getElementById('panel-code');
+      const previewTools = document.getElementById('preview-tools');
+      const codeTools = document.getElementById('code-tools');
+
+      if (tab === 'preview') {
+        btnPreview.classList.add('active');
+        btnCode.classList.remove('active');
+        panelPreview.style.display = 'flex';
+        panelCode.style.display = 'none';
+        previewTools.classList.remove('hidden');
+        codeTools.classList.add('hidden');
+      } else {
+        btnPreview.classList.remove('active');
+        btnCode.classList.add('active');
+        panelPreview.style.display = 'none';
+        panelCode.style.display = 'flex';
+        previewTools.classList.add('hidden');
+        codeTools.classList.remove('hidden');
+
+        // Force highlight adjustment
+        if (window.Prism) {
+          Prism.highlightElement(document.getElementById('code-block'));
+        }
+      }
+    }
+
+    // Resize viewport preview wrapper
+    function changeViewport(mode, btnElement) {
+      // Manage active state of buttons
+      document.querySelectorAll('.btn-responsive').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      btnElement.classList.add('active');
+
+      const wrapper = document.getElementById('iframe-wrapper');
+
+      // Clear viewport classes
+      wrapper.classList.remove('viewport-desktop', 'viewport-tablet', 'viewport-mobile');
+
+      // Add corresponding class
+      if (mode === 'desktop') {
+        wrapper.classList.add('viewport-desktop');
+      } else if (mode === 'tablet') {
+        wrapper.classList.add('viewport-tablet');
+      } else if (mode === 'mobile') {
+        wrapper.classList.add('viewport-mobile');
+      }
+    }
+
+    // Copy source code script
+    function copySourceCode() {
+      if (!activeLatihanKey) return;
+      const code = latihanData[activeLatihanKey].code;
+
+      navigator.clipboard.writeText(code).then(() => {
+        const copyIcon = document.getElementById('copy-icon');
+        const copyText = document.getElementById('copy-text');
+
+        copyIcon.textContent = '✅';
+        copyText.textContent = 'Disalin!';
+
+        setTimeout(() => {
+          copyIcon.textContent = '📋';
+          copyText.textContent = 'Salin Kode';
+        }, 2000);
+      }).catch(err => {
+        console.error('Gagal menyalin teks: ', err);
+      });
+    }
+  </script>
+
+  <!-- PrismJS Core and Autoloader markup for highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+
+</body>
+
+</html>

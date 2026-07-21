@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- 
+  Tugas Praktikum Modul 1 - Pemrograman Web
+  Nama Praktikan: Yudha Achmad Muddatzir
+  Topik: Formulir Pendaftaran Mahasiswa Baru
+-->
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pendaftaran Mahasiswa Baru</title>
+</head>
+<body style="background-color: #0f172a; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #f8fafc; padding: 2rem 1rem; margin: 0;">
+
+    <!-- Wadah Utama Formulir (Tampilan Rapi dengan Atribut Inline Style) -->
+    <div style="max-width: 600px; margin: 0 auto; background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 2rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);">
+        
+        <!-- Elemen Multimedia: Gambar Logo Kampus di atas Formulir -->
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwHCh5-Qn3Z5ty0oMcIAOgDwVyFZRO0gPyysIXzct5jw&s=10" 
+                 alt="Logo STITEK Bontang" 
+                 title="Logo STITEK Bontang" 
+                 style="max-width: 120px; height: auto;">
+        </div>
+
+        <!-- Heading Utama Halaman -->
+        <h1 style="text-align: center; font-size: 1.75rem; margin-top: 0; margin-bottom: 2rem; color: #f8fafc; font-weight: 700;">
+            Formulir Pendaftaran Mahasiswa Baru
+        </h1>
+
+        <!-- Formulir Pendaftaran Mahasiswa Baru -->
+        <form action="#" method="post" onsubmit="alert('Pendaftaran berhasil dikirim! Terima kasih.'); return false;">
+            
+            <!-- Pengelompokkan 1: Data Pribadi -->
+            <fieldset style="border: 1px solid #475569; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                <legend style="padding: 0 0.5rem; font-weight: 600; color: #3b82f6; font-size: 0.95rem;">Data Pribadi</legend>
+                
+                <!-- Input Teks - Nama Lengkap (Wajib Diisi) -->
+                <div style="margin-bottom: 1rem;">
+                    <label for="nama" style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: #cbd5e1;">Nama Lengkap <span style="color: #ef4444;">*</span></label>
+                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap sesuai ijazah..." required 
+                           style="width: 100%; padding: 0.75rem; border: 1px solid #475569; border-radius: 6px; background-color: #0f172a; color: #f8fafc; box-sizing: border-box;">
+                </div>
+
+                <!-- Input Email - Alamat Email (Wajib Diisi & Validasi Email) -->
+                <div style="margin-bottom: 1rem;">
+                    <label for="email" style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: #cbd5e1;">Alamat Email <span style="color: #ef4444;">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="contoh: nama@domain.com" required 
+                           style="width: 100%; padding: 0.75rem; border: 1px solid #475569; border-radius: 6px; background-color: #0f172a; color: #f8fafc; box-sizing: border-box;">
+                </div>
+
+                <!-- Radio Button - Pilihan Jenis Kelamin (Wajib Dipilih) -->
+                <div style="margin-bottom: 0.5rem;">
+                    <label style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: #cbd5e1;">Jenis Kelamin <span style="color: #ef4444;">*</span></label>
+                    <div style="display: flex; gap: 1.5rem; align-items: center; margin-top: 0.25rem;">
+                        <label style="font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="radio" id="pria" name="gender" value="Pria" required style="cursor: pointer; accent-color: #3b82f6;"> Pria
+                        </label>
+                        <label style="font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="radio" id="wanita" name="gender" value="Wanita" required style="cursor: pointer; accent-color: #3b82f6;"> Wanita
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Pengelompokkan 2: Jurusan dan Hobi -->
+            <fieldset style="border: 1px solid #475569; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                <legend style="padding: 0 0.5rem; font-weight: 600; color: #3b82f6; font-size: 0.95rem;">Pilihan Jurusan &amp; Hobi</legend>
+
+                <!-- Dropdown (Select) - Pilihan Jurusan (Minimal 3 Pilihan) -->
+                <div style="margin-bottom: 1rem;">
+                    <label for="jurusan" style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: #cbd5e1;">Pilihan Jurusan <span style="color: #ef4444;">*</span></label>
+                    <select id="jurusan" name="jurusan" required 
+                            style="width: 100%; padding: 0.75rem; border: 1px solid #475569; border-radius: 6px; background-color: #0f172a; color: #f8fafc; box-sizing: border-box; cursor: pointer;">
+                        <option value="" disabled selected>-- Pilih Jurusan --</option>
+                        <option value="Teknik Informatika">Teknik Informatika</option>
+                        <option value="Sistem Informasi">Sistem Informasi</option>
+                        <option value="Manajemen">Manajemen</option>
+                        <option value="Akuntansi">Akuntansi</option>
+                    </select>
+                </div>
+
+                <!-- Checkbox - Pilihan Hobi (Minimal 2 Pilihan) -->
+                <div style="margin-bottom: 0.5rem;">
+                    <label style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: #cbd5e1;">Hobi</label>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.25rem;">
+                        <label style="font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="hobi[]" value="Membaca" style="cursor: pointer; accent-color: #3b82f6;"> Membaca
+                        </label>
+                        <label style="font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="hobi[]" value="Olahraga" style="cursor: pointer; accent-color: #3b82f6;"> Olahraga
+                        </label>
+                        <label style="font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="hobi[]" value="Musik" style="cursor: pointer; accent-color: #3b82f6;"> Musik
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Pengelompokkan 3: Alamat Lengkap -->
+            <fieldset style="border: 1px solid #475569; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                <legend style="padding: 0 0.5rem; font-weight: 600; color: #3b82f6; font-size: 0.95rem;">Alamat Rumah</legend>
+                
+                <!-- Textarea - Kolom untuk Alamat Lengkap (Opsional) -->
+                <div style="margin-bottom: 0.5rem;">
+                    <label for="alamat" style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: #cbd5e1;">Alamat Lengkap</label>
+                    <textarea id="alamat" name="alamat" rows="4" placeholder="Masukkan alamat domisili lengkap Anda..." 
+                              style="width: 100%; padding: 0.75rem; border: 1px solid #475569; border-radius: 6px; background-color: #0f172a; color: #f8fafc; box-sizing: border-box; resize: vertical;"></textarea>
+                </div>
+            </fieldset>
+
+            <!-- Tombol Submit untuk Mengirim Formulir -->
+            <div style="margin-top: 1.5rem;">
+                <input type="submit" value="Kirim Pendaftaran" 
+                       style="width: 100%; padding: 0.85rem; border: none; border-radius: 6px; background-color: #2563eb; color: #ffffff; font-weight: bold; cursor: pointer; font-size: 1rem; transition: background-color 0.2s;">
+            </div>
+        </form>
+
+        <!-- Tautan Informasi Kampus di bawah Formulir -->
+        <div style="margin-top: 2rem; text-align: center; border-top: 1px dashed #475569; padding-top: 1.5rem;">
+            <a href="https://stitek.ac.id/" target="_blank" title="Kunjungi Website Resmi STITEK" 
+               style="color: #3b82f6; text-decoration: none; font-size: 0.9rem; font-weight: 500;">
+                Hubungi Kami &amp; Informasi Pendaftaran Selengkapnya →
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

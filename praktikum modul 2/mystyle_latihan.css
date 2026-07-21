@@ -1,0 +1,56 @@
+body {
+  background-color: #f8fafc; /* Latar belakang slate sangat terang */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  max-width: 450px;
+  width: 90%;
+}
+
+h1 {
+  color: #0f172a;
+  font-size: 1.75rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 10px;
+}
+
+/* Mengubah warna teks semua paragraf menjadi ungu sesuai instruksi */
+p {
+  color: #7c3aed; /* Ungu (violet-600) */
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.description {
+  font-style: italic;
+}
+
+.highlight {
+  font-weight: 500;
+  background-color: #f5f3ff; /* Latar belakang ungu sangat tipis */
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid #7c3aed;
+}
+
+.footer p {
+  font-size: 0.825rem;
+  color: #a78bfa; /* Ungu muda pudar */
+  margin-top: 20px;
+  margin-bottom: 0;
+}

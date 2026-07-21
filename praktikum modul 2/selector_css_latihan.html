@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Praktikum CSS - Latihan 3</title>
+  <style>
+    body {
+      background-color: #fafafa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+      border: 1px solid #eaeaea;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    /* Selector ID */
+    #judul-utama {
+      font-size: 32px; /* Ukuran font diubah sesuai instruksi */
+      color: #1e293b;
+      margin-top: 0;
+      margin-bottom: 24px;
+      font-weight: 700;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 12px;
+    }
+
+    #sub-info {
+      font-size: 14px; /* Ukuran font disesuaikan */
+      color: #64748b;
+      margin-bottom: 25px;
+    }
+
+    /* Selector Kelas Berbeda dengan Latar Belakang Berbeda */
+    .kelas-sukses {
+      background-color: #d1fae5; /* Latar belakang hijau muda */
+      color: #065f46;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 5px solid #10b981;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .kelas-peringatan {
+      background-color: #fef3c7; /* Latar belakang kuning muda */
+      color: #92400e;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 5px solid #f59e0b;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .kelas-bahaya {
+      background-color: #fee2e2; /* Latar belakang merah muda */
+      color: #991b1b;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 5px solid #ef4444;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Menggunakan Selector ID -->
+    <h1 id="judul-utama">Demo CSS Selectors</h1>
+    <div id="sub-info">Praktikan: Yudha Achmad Muddatzir (202212056)</div>
+
+    <!-- Menggunakan Selector Kelas Berbeda -->
+    <p class="kelas-sukses">
+      [SUCCESS] Paragraf ini menggunakan kelas <strong>.kelas-sukses</strong> dengan latar belakang hijau muda. Digunakan untuk informasi sukses atau aman.
+    </p>
+    
+    <p class="kelas-peringatan">
+      [WARNING] Paragraf ini menggunakan kelas <strong>.kelas-peringatan</strong> dengan latar belakang kuning muda. Digunakan untuk peringatan atau perhatian.
+    </p>
+    
+    <p class="kelas-bahaya">
+      [DANGER] Paragraf ini menggunakan kelas <strong>.kelas-bahaya</strong> dengan latar belakang merah muda. Digunakan untuk pesan kesalahan atau kritis.
+    </p>
+  </div>
+</body>
+</html>

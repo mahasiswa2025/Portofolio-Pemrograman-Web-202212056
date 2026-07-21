@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+  Nama: Yudha Achmad Muddatzir
+  NIM: 202212056
+  Program Studi: Teknik Informatika
+  Praktikum: Pemrograman Web - Modul 2 (Properti Warna & Background - Latihan)
+-->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Praktikum CSS - Latihan 4</title>
+  <style>
+    body {
+      background-image: url('gambar/latihan4_bg.jpg'); /* Diupdate ke folder gambar/ */
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #ffffff; /* Semua teks berwarna putih sesuai instruksi */
+    }
+
+    .container {
+      background-color: rgba(15, 23, 42, 0.6); /* Overlay gelap transparan */
+      backdrop-filter: blur(8px);
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: -0.025em;
+    }
+
+    /* Mengubah warna latar belakang paragraf menjadi abu-abu sesuai instruksi */
+    p {
+      background-color: rgba(75, 85, 99, 0.85); /* Abu-abu dengan transparansi untuk keterbacaan */
+      color: #ffffff;
+      padding: 16px;
+      border-radius: 8px;
+      line-height: 1.6;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-text {
+      background-color: #4b5563; /* Abu-abu solid */
+      text-align: center;
+      font-size: 0.85rem;
+      margin-top: 25px;
+      margin-bottom: 0;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Latar Belakang Gambar &amp; Paragraf Abu-Abu</h1>
+    
+    <p>
+      Paragraf ini diletakkan di atas latar belakang gambar dengan teks yang diatur berwarna putih. Latar belakang paragraf ini adalah abu-abu untuk keterbacaan yang lebih baik.
+    </p>
+    
+    <p>
+      Penggunaan properti <code>background-image</code> pada elemen body, dipadukan dengan <code>background-color: gray</code> pada elemen paragraf, memberikan kontras yang baik untuk teks putih di atas gambar.
+    </p>
+    
+    <p class="footer-text">
+      Praktikan: Yudha Achmad Muddatzir (202212056)
+    </p>
+  </div>
+</body>
+</html>
