@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toko Elektronik Cepat - Mini E-Commerce</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Inter & Outfit -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --dark-navy: #0f172a;
+      --light-gray: #f8fafc;
+      --font-title: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--light-gray);
+      color: #334155;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-title);
+    }
+    .navbar {
+      background-color: var(--dark-navy) !important;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+    #waktu-transaksi {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+      color: #2ecc71;
+    }
+    .product-list-item {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-left: 4px solid transparent;
+    }
+    .product-list-item:hover {
+      background-color: #f1f5f9;
+      padding-left: 20px;
+    }
+    .product-list-item.active {
+      background-color: #e2e8f0;
+      border-left-color: var(--primary-color);
+      font-weight: 600;
+    }
+    .slideshow-container {
+      position: relative;
+      background: #f1f5f9;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slideshow-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: opacity 0.3s ease;
+    }
+    .slideshow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 23, 42, 0.6);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .slideshow-btn:hover {
+      background: rgba(15, 23, 42, 0.9);
+      scale: 1.1;
+    }
+    .slideshow-btn-prev { left: 15px; }
+    .slideshow-btn-next { right: 15px; }
+    .card {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    .invoice-card {
+      background: linear-gradient(145deg, #ffffff, #f8fafc);
+      border-left: 5px solid #2ecc71;
+    }
+    .btn-checkout {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .btn-checkout:hover {
+      background-color: var(--primary-hover);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+  </style>
+</head>
+<body onload="initApp()">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <div class="container">
+      <a class="navbar-brand text-white" href="#">⚡ TOKO ELEKTRONIK CEPAT</a>
+      <div class="ms-auto text-end">
+        <span class="text-white-50 d-block d-sm-inline me-sm-2" style="font-size: 0.85rem;">Waktu Server:</span>
+        <span id="waktu-transaksi">Loading...</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container my-5">
+    <div class="row g-4">
+      
+      <!-- Left Column: Display & Daftar Produk -->
+      <div class="col-lg-8">
+        
+        <!-- Display Produk Utama -->
+        <div class="card p-4 mb-4 bg-white">
+          <h3 class="mb-3 text-dark">Display Produk</h3>
+          <div class="slideshow-container shadow-sm mb-3">
+            <img id="display-gambar" src="" class="slideshow-img" alt="Product Image">
+            <button class="slideshow-btn slideshow-btn-prev" onclick="gantiGambar(-1)">&lt;</button>
+            <button class="slideshow-btn slideshow-btn-next" onclick="gantiGambar(1)">&gt;</button>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div>
+              <h2 id="display-nama" class="mb-1 fw-bold text-dark">Nama Produk</h2>
+              <p id="display-harga" class="fs-4 text-primary fw-semibold mb-0">Rp 0</p>
+            </div>
+            <span class="badge bg-secondary p-2" id="slideshow-indicator">Gambar 1 dari 2</span>
+          </div>
+        </div>
+
+        <!-- Daftar Produk (Looping) -->
+        <div class="card p-4 bg-white">
+          <h3 class="mb-3 text-dark">Pilih Kategori Produk</h3>
+          <div class="list-group list-group-flush border rounded" id="daftar-produk-list">
+            <!-- Diisi secara dinamis oleh JavaScript menggunakan perulangan -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Form Pemesanan & Struk/Receipt -->
+      <div class="col-lg-4">
+        
+        <!-- Form Pemesanan -->
+        <div class="card p-4 bg-white mb-4">
+          <h3 class="mb-3 text-dark">Form Pemesanan</h3>
+          <form onsubmit="event.preventDefault(); prosesPemesanan();">
+            <div class="mb-3">
+              <label for="nama-pemesan" class="form-label fw-semibold">Nama Pemesan</label>
+              <input type="text" class="form-control" id="nama-pemesan" placeholder="Ketik nama lengkap Anda...">
+              <small class="text-danger" id="err-nama"></small>
+            </div>
+            
+            <div class="mb-3">
+              <label for="jumlah-pesan" class="form-label fw-semibold">Jumlah Pesan</label>
+              <input type="number" class="form-control" id="jumlah-pesan" min="1" value="1">
+              <small class="text-danger" id="err-jumlah"></small>
+            </div>
+            
+            <div class="mb-3">
+              <label for="kode-promo" class="form-label fw-semibold">Kode Promo</label>
+              <input type="text" class="form-control" id="kode-promo" placeholder="Contoh: DISKON10" style="text-transform: uppercase;">
+              <small class="text-muted" style="font-size: 0.85rem;">Gunakan kode <b>DISKON10</b> untuk potongan 10%</small>
+            </div>
+            
+            <button type="submit" class="btn btn-checkout w-100 py-2.5">Pesan Sekarang</button>
+          </form>
+        </div>
+
+        <!-- Output Struk Ringkasan Pesanan -->
+        <div class="card p-4 invoice-card bg-white d-none" id="struk-pemesanan">
+          <h4 class="text-success fw-bold mb-3 d-flex align-items-center">
+            <span>✓ Transaksi Berhasil</span>
+          </h4>
+          <hr class="my-3">
+          <div class="row g-2" style="font-size: 0.95rem;">
+            <div class="col-5 text-muted">ID Pesanan:</div>
+            <div class="col-7 fw-bold" id="receipt-id">INV-12345</div>
+            
+            <div class="col-5 text-muted">Nama Pemesan:</div>
+            <div class="col-7" id="receipt-pemesan">Nama</div>
+            
+            <div class="col-5 text-muted">Produk:</div>
+            <div class="col-7" id="receipt-produk">Nama Produk</div>
+            
+            <div class="col-5 text-muted">Jumlah:</div>
+            <div class="col-7" id="receipt-jumlah">1 Pcs</div>
+            
+            <hr class="my-2">
+            
+            <div class="col-5 text-muted">Subtotal:</div>
+            <div class="col-7" id="receipt-subtotal">Rp 0</div>
+            
+            <div class="col-5 text-muted">Potongan (Promo):</div>
+            <div class="col-7 text-danger" id="receipt-diskon">- Rp 0</div>
+            
+            <hr class="my-2">
+            
+            <div class="col-5 fw-bold text-dark" style="font-size: 1.05rem;">Total Akhir:</div>
+            <div class="col-7 fw-bold text-primary" style="font-size: 1.05rem;" id="receipt-total">Rp 0</div>
+          </div>
+          <hr class="my-3">
+          <small class="text-muted text-center d-block">Terima kasih telah berbelanja di Toko Elektronik Cepat!</small>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white-50 text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-0">&copy; 2026 Toko Elektronik Cepat. All rights reserved.</p>
+      <small>Dibuat oleh Yudha Achmad Muddatzir - 202212056 | STITEK Bontang</small>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JavaScript Logika E-Commerce -->
+  <script>
+    // 1. Data Produk dalam bentuk Array of Objects (min 3 produk)
+    var produk = [
+      {
+        nama: "Smartphone Pro Max",
+        harga: 12500000,
+        gambar: ["product_phone_1.png", "product_phone_2.png"]
+      },
+      {
+        nama: "Laptop UltraBook 14",
+        harga: 18900000,
+        gambar: ["product_laptop_1.png", "product_laptop_2.png"]
+      },
+      {
+        nama: "Smartwatch Active Sport",
+        harga: 2500000,
+        gambar: ["product_watch_1.png", "product_watch_2.png"]
+      }
+    ];
+
+    var indexProdukAktif = 0;
+    var indexGambarAktif = 0;
+
+    // 2. Inisialisasi Aplikasi saat Load
+    function initApp() {
+      jalankanJam();
+      tampilkanDaftarProduk();
+      pilihProduk(0);
+    }
+
+    // 3. Menampilkan Tanggal dan Jam Dinamis secara Real-Time
+    function jalankanJam() {
+      function updateJam() {
+        var sekarang = new Date();
+        var hariList = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        var bulanList = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        
+        var hari = hariList[sekarang.getDay()];
+        var tanggal = sekarang.getDate();
+        var bulan = bulanList[sekarang.getMonth()];
+        var tahun = sekarang.getFullYear();
+        
+        var jam = sekarang.getHours();
+        var menit = sekarang.getMinutes();
+        var detik = sekarang.getSeconds();
+        
+        // Menambahkan angka 0 di depan jika di bawah 10
+        jam = (jam < 10 ? "0" : "") + jam;
+        menit = (menit < 10 ? "0" : "") + menit;
+        detik = (detik < 10 ? "0" : "") + detik;
+        
+        var waktuString = hari + ", " + tanggal + " " + bulan + " " + tahun + " - " + jam + ":" + menit + ":" + detik;
+        document.getElementById("waktu-transaksi").innerText = waktuString;
+      }
+      updateJam();
+      setInterval(updateJam, 1000);
+    }
+
+    // 4. Perulangan untuk Menampilkan Daftar Produk di Sidebar
+    function tampilkanDaftarProduk() {
+      var containerList = document.getElementById("daftar-produk-list");
+      containerList.innerHTML = "";
+      
+      for (let i = 0; i < produk.length; i++) {
+        var formattedHarga = "Rp " + produk[i].harga.toLocaleString('id-ID');
+        containerList.innerHTML += `
+          <button type="button" id="item-prod-${i}" class="list-group-item list-group-item-action product-list-item d-flex justify-content-between align-items-center py-3" onclick="pilihProduk(${i})">
+            <div>
+              <h6 class="mb-0 text-dark fw-semibold">${produk[i].nama}</h6>
+              <small class="text-muted">Kategori Elektronik</small>
+            </div>
+            <span class="badge bg-primary rounded-pill">${formattedHarga}</span>
+          </button>
+        `;
+      }
+    }
+
+    // 5. Interaksi Klik untuk Memilih Produk Aktif
+    function pilihProduk(index) {
+      indexProdukAktif = index;
+      indexGambarAktif = 0; // Reset ke gambar pertama produk
+      
+      // Update status visual list item aktif
+      for (let i = 0; i < produk.length; i++) {
+        var el = document.getElementById("item-prod-" + i);
+        if (el) {
+          if (i === index) {
+            el.classList.add("active");
+          } else {
+            el.classList.remove("active");
+          }
+        }
+      }
+      
+      updateDisplay();
+    }
+
+    // 6. Manipulasi Gambar Dinamis (Image Slideshow)
+    function gantiGambar(arah) {
+      var gambarList = produk[indexProdukAktif].gambar;
+      indexGambarAktif += arah;
+      
+      if (indexGambarAktif >= gambarList.length) {
+        indexGambarAktif = 0;
+      }
+      if (indexGambarAktif < 0) {
+        indexGambarAktif = gambarList.length - 1;
+      }
+      
+      updateDisplay();
+    }
+
+    // 7. Update Elemen Display DOM Utama
+    function updateDisplay() {
+      var prod = produk[indexProdukAktif];
+      document.getElementById("display-gambar").src = prod.gambar[indexGambarAktif];
+      document.getElementById("display-nama").innerText = prod.nama;
+      document.getElementById("display-harga").innerText = "Rp " + prod.harga.toLocaleString('id-ID');
+      document.getElementById("slideshow-indicator").innerText = "Gambar " + (indexGambarAktif + 1) + " dari " + prod.gambar.length;
+    }
+
+    // 8. Logika Pemesanan (Validasi Form & Kalkulasi Real-Time)
+    function prosesPemesanan() {
+      var inputNama = document.getElementById("nama-pemesan").value.trim();
+      var inputJumlah = document.getElementById("jumlah-pesan").value;
+      var inputPromo = document.getElementById("kode-promo").value.trim();
+      
+      var errNama = document.getElementById("err-nama");
+      var errJumlah = document.getElementById("err-jumlah");
+      
+      errNama.innerText = "";
+      errJumlah.innerText = "";
+      
+      var isValid = true;
+      
+      // Validasi Nama Pemesan
+      if (inputNama === "") {
+        errNama.innerText = "Nama pemesan tidak boleh kosong!";
+        isValid = false;
+      }
+      
+      // Validasi Jumlah Pesan
+      var jumlah = parseInt(inputJumlah);
+      if (isNaN(jumlah) || inputJumlah === "") {
+        errJumlah.innerText = "Jumlah pesan tidak boleh kosong!";
+        isValid = false;
+      } else if (jumlah <= 0) {
+        errJumlah.innerText = "Jumlah pesan harus minimal 1!";
+        isValid = false;
+      }
+      
+      if (!isValid) return;
+      
+      // Kalkulasi Harga
+      var prod = produk[indexProdukAktif];
+      var subtotal = prod.harga * jumlah;
+      
+      // Logika Percabangan & Manipulasi Objek String
+      var diskon = 0;
+      if (inputPromo.toUpperCase() === "DISKON10") {
+        diskon = subtotal * 0.10;
+      }
+      
+      var totalAkhir = subtotal - diskon;
+      
+      // Generate Order ID dengan Objek Math acak 5 digit
+      var randDigits = Math.floor(Math.random() * 90000) + 10000;
+      var orderId = "INV-" + randDigits;
+      
+      // Tampilkan Ringkasan di area Struk
+      document.getElementById("receipt-id").innerText = orderId;
+      document.getElementById("receipt-pemesan").innerText = inputNama;
+      document.getElementById("receipt-produk").innerText = prod.nama;
+      document.getElementById("receipt-jumlah").innerText = jumlah + " Pcs";
+      document.getElementById("receipt-subtotal").innerText = "Rp " + subtotal.toLocaleString('id-ID');
+      document.getElementById("receipt-diskon").innerText = "- Rp " + diskon.toLocaleString('id-ID');
+      document.getElementById("receipt-total").innerText = "Rp " + totalAkhir.toLocaleString('id-ID');
+      
+      // Animasi Tampil Struk
+      var struk = document.getElementById("struk-pemesanan");
+      struk.classList.remove("d-none");
+      struk.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
