@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Latihan Validasi Form - Latihan</title>
+  <style>
+    body { font-family: sans-serif; margin: 30px; }
+    .form-container { background: #fafafa; border: 1px solid #ddd; padding: 25px; border-radius: 8px; max-width: 400px; }
+    .form-group { margin-bottom: 15px; }
+    label { font-weight: bold; display: block; margin-bottom: 5px; }
+    input[type="text"], input[type="email"] { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    input[type="submit"] { padding: 10px 15px; border: none; background: #007bff; color: white; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    input[type="submit"]:hover { background: #0056b3; }
+    .error { color: red; font-size: 0.9em; display: block; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Form Registrasi</h2>
+    <form onsubmit="return validasi()">
+      <div class="form-group">
+        <label for="nama">Nama Lengkap:</label>
+        <input type="text" id="nama" name="nama" placeholder="Contoh: Yudha Achmad">
+        <small id="nama-error" class="error"></small>
+      </div>
+      
+      <!-- Modifikasi: Menambahkan input Email -->
+      <div class="form-group">
+        <label for="email">Alamat Email:</label>
+        <input type="email" id="email" name="email" placeholder="Contoh: yudha@gmail.com">
+        <small id="email-error" class="error"></small>
+      </div>
+      
+      <input type="submit" value="Daftar">
+    </form>
+  </div>
+  
+  <script>
+    function validasi() {
+      var inputNama = document.getElementById("nama").value.trim();
+      var inputEmail = document.getElementById("email").value.trim();
+      
+      var errorNama = document.getElementById("nama-error");
+      var errorEmail = document.getElementById("email-error");
+      
+      // Reset error messages
+      errorNama.innerHTML = "";
+      errorEmail.innerHTML = "";
+      
+      var isValid = true;
+      
+      // Validasi Nama
+      if (inputNama == "") {
+        errorNama.innerHTML = "Nama tidak boleh kosong!";
+        isValid = false;
+      }
+      
+      // Modifikasi: Validasi Email tidak boleh kosong
+      if (inputEmail == "") {
+        errorEmail.innerHTML = "Email tidak boleh kosong!";
+        isValid = false;
+      } else {
+        // Validasi format email sederhana menggunakan regular expression
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(inputEmail)) {
+          errorEmail.innerHTML = "Format email tidak valid!";
+          isValid = false;
+        }
+      }
+      
+      if (!isValid) {
+        return false; // Mencegah form untuk dikirim
+      }
+      
+      alert("Registrasi berhasil!\nNama: " + inputNama + "\nEmail: " + inputEmail);
+      return true;
+    }
+  </script>
+</body>
+</html>

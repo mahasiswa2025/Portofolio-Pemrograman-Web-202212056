@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Latihan Event Handling - Latihan</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    #inputNama { border: 2px solid #ccc; padding: 8px; transition: all 0.3s; border-radius: 4px; outline: none; }
+    #inputNama:focus { border-color: dodgerblue; box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); }
+    #gambar { border: 3px solid #ddd; border-radius: 8px; transition: transform 0.3s; cursor: pointer; }
+    #gambar:hover { transform: scale(1.05); }
+    .container { max-width: 600px; margin: 0 auto; background: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Latihan Penanganan Kejadian (Event Handling)</h2>
+  <hr>
+  <h3>Event onmouseover & onmouseout</h3>
+  <p class="text-muted">Arahkan mouse Anda di atas gambar untuk merubahnya:</p>
+  <img id="gambar" src="https://placehold.co/200x150/e8e8e8/000?text=Gambar+Awal" alt="Gambar" onmouseover="gantiGambar()" onmouseout="kembalikanGambar()">
+  
+  <hr class="my-4">
+  
+  <h3>Event onfocus & onchange</h3>
+  <p class="text-muted">Ketik nama Anda lalu tekan Enter atau klik di luar kotak input:</p>
+  <div class="form-group">
+    <label for="inputNama">Ketik Nama Anda:</label>
+    <input type="text" id="inputNama" onchange="tampilkanOutput()" placeholder="Masukkan nama...">
+  </div>
+  <p class="mt-3">Output: <span id="hasil" style="color: dodgerblue; font-size: 1.1em;"></span></p>
+</div>
+
+  <script>
+    function gantiGambar() {
+      document.getElementById("gambar").src = "https://placehold.co/200x150/3498db/fff?text=Gambar+Kedua";
+    }
+    function kembalikanGambar() {
+      document.getElementById("gambar").src = "https://placehold.co/200x150/e8e8e8/000?text=Gambar+Awal";
+    }
+    function tampilkanOutput() {
+      var nilaiInput = document.getElementById("inputNama").value;
+      document.getElementById("hasil").innerHTML = "<b>" + nilaiInput + "</b>";
+    }
+  </script>
+</body>
+</html>

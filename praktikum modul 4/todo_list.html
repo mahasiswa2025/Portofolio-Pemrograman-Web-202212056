@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>Aplikasi To-Do List</title></head>
+<body>
+  <h2>To-Do List Sederhana</h2>
+  <input type="text" id="input-todo" placeholder="Ketik tugas baru...">
+  <button onclick="tambahTugas()">Tambah</button>
+  <ul id="daftar-tugas"></ul>
+  
+  <script>
+    var tugas = [];
+    function tambahTugas() {
+      var inputElement = document.getElementById("input-todo");
+      tugas.push(inputElement.value);
+      inputElement.value = "";
+      tampilkanDaftar();
+    }
+    function tampilkanDaftar() {
+      var daftarElement = document.getElementById("daftar-tugas");
+      daftarElement.innerHTML = "";
+      for (let i = 0; i < tugas.length; i++) {
+        daftarElement.innerHTML += "<li>" + tugas[i] + "</li>";
+      }
+    }
+  </script>
+</body>
+</html>

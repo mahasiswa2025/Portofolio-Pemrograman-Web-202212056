@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Latihan Logika Percabangan - Latihan</title>
+  <style>
+    body { font-family: sans-serif; margin: 30px; }
+    .card { background: #fdfdfd; padding: 25px; border-radius: 8px; border: 1px solid #ddd; max-width: 450px; }
+    input { padding: 8px; width: 80%; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc; }
+    button { padding: 8px 15px; border-radius: 4px; border: none; background: #28a745; color: white; cursor: pointer; }
+    button:hover { background: #218838; }
+    #hasil { margin-top: 20px; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Kalkulator Diskon Belanja</h2>
+    <p>Masukkan total belanja Anda:</p>
+    <input type="number" id="totalBelanja" placeholder="Contoh: 150000">
+    <button onclick="cekDiskon()">Cek Diskon</button>
+    <div id="hasil"></div>
+  </div>
+  
+  <script>
+    function cekDiskon() {
+      var total = parseFloat(document.getElementById("totalBelanja").value);
+      var pesan = "";
+      
+      if (isNaN(total) || total < 0) {
+        pesan = "<span style='color: red;'>Mohon masukkan angka belanja yang valid dan bernilai positif.</span>";
+      } else if (total >= 250000) {
+        // Modifikasi: menambahkan diskon 15% jika belanja di atas Rp 250.000
+        var diskon = total * 0.15;
+        var totalBayar = total - diskon;
+        pesan = "<h5>Selamat! Anda mendapatkan diskon 15% sebesar Rp " + diskon.toLocaleString('id-ID') + ".</h5>Total bayar: <b style='color: #28a745;'>Rp " + totalBayar.toLocaleString('id-ID') + "</b>";
+      } else if (total >= 100000) {
+        // Diskon 10% jika belanja di atas Rp 100.000 (hingga Rp 249.999)
+        var diskon = total * 0.10;
+        var totalBayar = total - diskon;
+        pesan = "<h5>Selamat! Anda mendapatkan diskon 10% sebesar Rp " + diskon.toLocaleString('id-ID') + ".</h5>Total bayar: <b style='color: #28a745;'>Rp " + totalBayar.toLocaleString('id-ID') + "</b>";
+      } else {
+        pesan = "<h5>Maaf, tidak ada diskon.</h5>Total bayar: <b>Rp " + total.toLocaleString('id-ID') + "</b><br><small class='text-muted'>Belanja minimal Rp 100.000 untuk mendapatkan diskon 10% atau Rp 250.000 untuk diskon 15%!</small>";
+      }
+      document.getElementById("hasil").innerHTML = pesan;
+    }
+  </script>
+</body>
+</html>
