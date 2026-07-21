@@ -1,70 +1,44 @@
-# 🚀 Portofolio Digital Praktikum Pemrograman Web
+<h1 align="center">🌐 Portofolio Pemrograman Web</h1>
 
-> **Repositori Resmi Praktikum Pemrograman Web - Semester 8**
+<p align="center">
+  <b>Yudha Achmad M · 202212056</b>
+</p>
 
----
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
+  <img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP" />
+  <img src="https://img.shields.io/badge/BOOTSTRAP-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap" />
+  <img src="https://img.shields.io/badge/MYSQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
+</p>
 
-## 👤 Informasi Mahasiswa
-
-| Informasi | Detail |
-| :--- | :--- |
-| **Nama Lengkap** | **Yudha Achmad M** |
-| **NIM** | **202212056** |
-| **Mata Kuliah** | Pemrograman Web |
-| **Repositori GitHub** | [Portofolio-Pemrograman-Web-202212056](https://github.com/mahasiswa2025/Portofolio-Pemrograman-Web-202212056) |
-
----
-
-## 📝 Deskripsi Repositori
-
-Repositori ini disusun sebagai dokumentasi dan portofolio digital yang berisi seluruh hasil tugas, latihan, dan proyek praktikum dari **Modul 1 hingga Modul 7** mata kuliah Pemrograman Web. Struktur repositori ini dikelola menggunakan Version Control System (**Git**) dan di-hosting di **GitHub** menggunakan alur kerja *branching* dan *pull request*.
+<p align="center">
+  <i>Kumpulan tugas dan latihan praktikum mata kuliah Pemrograman Web</i>
+</p>
 
 ---
 
-## 📁 Daftar Isi Modul & Navigasi
+## 📖 Tentang Repositori
 
-Berikut adalah daftar folder modul praktikum yang telah diselesaikan:
-
-### 🔹 [Modul 1: Dasar HTML & Multimedia](./praktikum%20modul%201)
-* **Keterangan:** Pengenalan struktur dasar HTML5, elemen hirarki teks, pembuatan form, tabel, serta integrasi file audio (`.mp3`), video (`.mp4`), dan gambar.
-
-### 🔹 [Modul 2: CSS & Layouting Responsive](./praktikum%20modul%202)
-* **Keterangan:** Implementasi *styling* CSS (Inline, Internal, External), penggunaan *selector*, *box model*, properti warna & teks, teknik layouting modern (**Flexbox** & **Grid**), serta penerapan *Responsive Web Design*.
-
-### 🔹 [Modul 3: Pemrograman Web Lanjutan (Bootstrap)](./praktikum%20modul%203)
-* **Keterangan:** Pengenalan dan penerapan *Framework* **Bootstrap 5** untuk pembuatan antarmuka modern, mencakup komponen *Navbar*, *Card*, *Modal*, *Pagination*, *Typography*, dan sistem *Grid Responsive*.
-
-### 🔹 [Modul 4: Dasar JavaScript & Interaktivitas Web](./praktikum%20modul%204)
-* **Keterangan:** Pemrograman sisi klien (*Client-Side Scripting*) menggunakan **JavaScript Vanilla**, mencakup manipulasi DOM, penanganan *Event*, objek bawaan (*Date*, *Math*, *String*), pembuatan kalkulator interaktif, *Slideshow*, *To-Do List*, dan validasi formulir.
-
-### 🔹 [Modul 5: Pemrograman Server-Side dengan PHP](./praktikum%20modul%205)
-* **Keterangan:** Pengenalan **PHP** sebagai bahasa pemroses server-side, sintaks dasar, variabel, tipe data, fungsi, percabangan (`if/switch`), perulangan (`for/while`), variabel superglobal (`$_POST`, `$_GET`), serta studi kasus pembuatan aplikasi **Buku Tamu**.
-
-### 🔹 [Modul 6: Integrasi Database MySQL & CRUD](./praktikum%20modul%206)
-* **Keterangan:** Koneksi PHP ke database **MySQL**, pembuatan skema SQL (`db_perusahaan` & `db_toko`), serta implementasi fungsi dasar web **CRUD** (*Create, Read, Update, Delete*) data pada aplikasi toko dan data pegawai.
-
-### 🔹 [Modul 7: Version Control System (Git & GitHub)](./)
-* **Keterangan:** Manajemen repositori lokal dan remote, inisialisasi Git, alur pengerjaan *Branching* (`git branch`, `git checkout`), pengunggahan kode (`git add`, `git commit`, `git push`), pembuatan *Pull Request* (PR), serta penggabungan (*merge*) repositori portofolio digital.
+Repositori ini berisi seluruh tugas praktikum Pemrograman Web yang dikerjakan selama satu semester, mulai dari dasar HTML & CSS hingga pengembangan back-end dengan PHP. Setiap modul disimpan dalam folder terpisah agar mudah ditelusuri.
 
 ---
 
-## 💻 Teknologi yang Digunakan
+## 📁 Daftar Modul
 
-- **Frontend:** HTML5, CSS3, JavaScript (ES6+), Bootstrap 5
-- **Backend:** PHP 8.x
-- **Database:** MySQL / MariaDB
-- **Tools & VCS:** VS Code, Git, GitHub
+| Modul | Topik | Deskripsi Singkat | Tautan |
+| :---: | :--- | :--- | :---: |
+| **01** | 🧱 **Dasar HTML** | Struktur dokumen HTML, elemen teks, multimedia, dan semantik dasar halaman web | [Buka ↗](./praktikum%20modul%201) |
+| **02** | 🎨 **CSS & Layouting** | Styling CSS, selector, box model, properti warna, Flexbox, dan Grid responsive | [Buka ↗](./praktikum%20modul%202) |
+| **03** | 📱 **Bootstrap 5** | Pembuatan UI modern dengan komponen Bootstrap, Navbar, Card, Modal, dan Grid | [Buka ↗](./praktikum%20modul%203) |
+| **04** | ⚡ **JavaScript** | Client-side scripting, manipulasi DOM, event handling, kalkulator, dan validasi form | [Buka ↗](./praktikum%20modul%204) |
+| **05** | 🐘 **PHP Server-Side** | Pemrograman PHP dasar, variabel, fungsi, percabangan, perulangan, dan aplikasi buku tamu | [Buka ↗](./praktikum%20modul%205) |
+| **06** | 🗄️ **Database & CRUD** | Integrasi PHP ke MySQL, koneksi database, dan implementasi fitur CRUD data toko | [Buka ↗](./praktikum%20modul%206) |
+| **07** | 🐙 **Git & GitHub** | Manajemen repositori, branching, commit, push, pull request, dan portofolio digital | [Buka ↗](./) |
 
 ---
 
-## ⚙️ Cara Menjalankan Proyek Secara Lokal
-
-1. **Clone Repositori ini:**
-   ```bash
-   git clone https://github.com/mahasiswa2025/Portofolio-Pemrograman-Web-202212056.git
-   ```
-2. **Pindah ke Direktori Proyek:**
-   ```bash
-   cd Portofolio-Pemrograman-Web-202212056
-   ```
-3. Buka folder di **Visual Studio Code** atau jalankan file PHP melalui lokal server seperti **XAMPP / Laragon** (`htdocs/`).
+<p align="center">
+  <b>Praktikum Pemrograman Web 2026</b> • Yudha Achmad M (202212056)
+</p>
