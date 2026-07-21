@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jam Digital & Kalender - Latihan</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #2c3e50; color: white; margin: 0; }
+        .clock-box { background: #34495e; padding: 30px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); text-align: center; max-width: 400px; width: 100%; }
+        #jam { font-size: 3em; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #2ecc71; margin-bottom: 10px; text-shadow: 0 0 10px rgba(46, 204, 113, 0.4); }
+        #tanggal { font-size: 1.2em; color: #ecf0f1; }
+        hr { border: 0; border-top: 1px solid #7f8c8d; margin: 15px 0; }
+    </style>
+</head>
+<body onload="jalankanJam()">
+    <div class="clock-box">
+        <h2>Jam & Tanggal Real-Time</h2>
+        <hr>
+        <div id="jam">00:00:00</div>
+        <div id="tanggal">Loading date...</div>
+    </div>
+  
+    <script>
+        function updateJam() {
+            var sekarang = new Date();
+            
+            // 1. Tampilkan Jam Dinamis
+            var jam = sekarang.getHours();
+            var menit = sekarang.getMinutes();
+            var detik = sekarang.getSeconds();
+            jam = (jam < 10 ? "0" : "") + jam;
+            menit = (menit < 10 ? "0" : "") + menit;
+            detik = (detik < 10 ? "0" : "") + detik;
+            document.getElementById("jam").innerText = jam + ":" + menit + ":" + detik;
+            
+            // 2. Modifikasi: Tampilkan tanggal bahasa Indonesia lengkap
+            var namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+            var namaBulan = [
+                "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ];
+            
+            var hari = namaHari[sekarang.getDay()];
+            var tanggal = sekarang.getDate();
+            var bulan = namaBulan[sekarang.getMonth()];
+            var tahun = sekarang.getFullYear();
+            
+            document.getElementById("tanggal").innerText = hari + ", " + tanggal + " " + bulan + " " + tahun;
+        }
+  
+        function jalankanJam() {
+            updateJam(); // Panggil pertama kali agar tidak delay 1 detik saat load
+            setInterval(updateJam, 1000);
+        }
+    </script>
+</body>
+</html>

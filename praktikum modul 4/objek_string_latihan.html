@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+  Nama: Yudha Achmad Muddatzir
+  NIM: 202212056
+  Program Studi: Teknik Informatika
+  Praktikum: Pemrograman Web - Modul 4 (Objek String - Latihan)
+-->
+<html>
+<head>
+  <title>Latihan Objek String - Latihan</title>
+  <style>
+    body { font-family: sans-serif; margin: 30px; }
+    .container { background: #fafafa; border: 1px solid #ddd; padding: 20px; border-radius: 8px; max-width: 450px; }
+    input[type="text"] { padding: 8px; width: 70%; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    button { padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .result { margin-top: 15px; padding: 10px; background: white; border: 1px solid #eee; border-radius: 4px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Analisis Nama</h2>
+    <input type="text" id="inputNama" placeholder="Masukkan nama Anda">
+    <button onclick="analisisNama()">Analisis</button>
+    <div id="hasilAnalisis" class="result">Silakan masukkan nama Anda untuk memulai analisis.</div>
+  </div>
+  
+  <script>
+    function analisisNama() {
+      var nama = document.getElementById("inputNama").value.trim();
+      if (nama === "") {
+        document.getElementById("hasilAnalisis").innerHTML = "<span style='color:red;'>Nama tidak boleh kosong!</span>";
+        return;
+      }
+      var hasil = "";
+      hasil += "Nama dalam huruf kapital: <b>" + nama.toUpperCase() + "</b><br>";
+      // Modifikasi: Menambahkan analisis string tambahan
+      hasil += "Nama dalam huruf kecil: <b>" + nama.toLowerCase() + "</b><br>";
+      hasil += "Jumlah karakter (termasuk spasi): <b>" + nama.length + "</b> karakter<br>";
+      hasil += "Karakter pertama: <b>" + nama.charAt(0) + "</b><br>";
+      hasil += "3 karakter pertama: <b>" + nama.substring(0, 3) + "</b><br>";
+      hasil += "3 karakter terakhir: <b>" + nama.substring(nama.length - 3) + "</b>";
+      
+      document.getElementById("hasilAnalisis").innerHTML = hasil;
+    }
+  </script>
+</body>
+</html>

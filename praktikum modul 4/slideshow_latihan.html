@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Slideshow - Latihan</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 30px; background: #fdfdfd; }
+    .gallery { background: white; border: 1px solid #ddd; padding: 20px; border-radius: 8px; max-width: 540px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    img { border-radius: 6px; border: 1px solid #ccc; max-width: 100%; height: auto; }
+    .btn-group { margin-top: 15px; }
+    button { padding: 10px 20px; font-size: 15px; font-weight: bold; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; transition: background 0.2s; margin: 0 5px; }
+    button:hover { background: #2980b9; }
+    .caption { margin-top: 10px; font-size: 1.1em; color: #555; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="gallery">
+    <h2>Galeri Gambar Dinamis</h2>
+    <img id="slideshow-image" src="" alt="Slideshow" width="500" height="300">
+    <div id="image-caption" class="caption">Loading...</div>
+    <div class="btn-group">
+      <button onclick="gantiGambar(-1)">Previous</button>
+      <button onclick="gantiGambar(1)">Next</button>
+    </div>
+  </div>
+  
+  <script>
+    // Modifikasi: Menambahkan 2 gambar baru ke dalam array gambar (total 5 gambar)
+    var gambar = [
+        "https://placehold.co/500x300/3498db/ffffff?text=Gambar+1",
+        "https://placehold.co/500x300/e74c3c/ffffff?text=Gambar+2",
+        "https://placehold.co/500x300/2ecc71/ffffff?text=Gambar+3",
+        "https://placehold.co/500x300/9b59b6/ffffff?text=Gambar+4",
+        "https://upload.wikimedia.org/wikipedia/commons/e/ef/Bahlil_Lahadalia_HIPMI.jpg"
+    ];
+    var indexGambar = 0;
+    var imageElement = document.getElementById("slideshow-image");
+    var captionElement = document.getElementById("image-caption");
+
+    function tampilkanGambar() {
+        imageElement.src = gambar[indexGambar];
+        captionElement.innerText = "Menampilkan Gambar " + (indexGambar + 1) + " dari " + gambar.length;
+    }
+
+    function gantiGambar(arah) {
+        indexGambar += arah;
+        // Jika sudah gambar terakhir, kembali ke awal
+        if (indexGambar >= gambar.length) {
+            indexGambar = 0;
+        }
+        // Jika sudah gambar pertama dan menekan previous, pergi ke akhir
+        if (indexGambar < 0) {
+            indexGambar = gambar.length - 1;
+        }
+        tampilkanGambar();
+    }
+    // Tampilkan gambar pertama saat halaman dimuat
+    tampilkanGambar();
+  </script>
+</body>
+</html>

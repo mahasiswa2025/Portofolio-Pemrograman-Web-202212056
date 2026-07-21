@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Latihan Manipulasi DOM - Latihan</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+#judul { color: steelblue; transition: all 0.3s ease; }
+button { padding: 10px 15px; font-size: 16px; cursor: pointer; border-radius: 5px; border: 1px solid #ccc; background-color: #f0f0f0; }
+button:hover { background-color: #e0e0e0; }
+</style>
+</head>
+<body>
+<h1 id="judul">Selamat Datang di Praktikum JavaScript</h1>
+<button onclick="ubahTeks()">Ubah Teks Judul</button>
+<script>
+  function ubahTeks() {
+      var elemenJudul = document.getElementById("judul");
+      elemenJudul.innerHTML = "Teks Berhasil Diubah!";
+      elemenJudul.style.color = "crimson";
+      // Modifikasi: menambahkan perubahan ukuran font menjadi 36px sesuai instruksi modul
+      elemenJudul.style.fontSize = "36px";
+    }
+  </script>
+</body>
+</html>

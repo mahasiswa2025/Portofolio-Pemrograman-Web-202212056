@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+  Nama: Yudha Achmad Muddatzir
+  NIM: 202212056
+  Program Studi: Teknik Informatika
+  Praktikum: Pemrograman Web - Modul 4 (Objek Math - Latihan)
+-->
+<html>
+<head>
+  <title>Latihan Objek Math - Latihan</title>
+  <style>
+    body { font-family: sans-serif; margin: 30px; }
+    .container { background: #fafafa; border: 1px solid #ddd; padding: 20px; border-radius: 8px; max-width: 450px; }
+    .inputs { margin-bottom: 15px; }
+    input { width: 80px; padding: 5px; border-radius: 4px; border: 1px solid #ccc; text-align: center; }
+    button { padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .result { margin-top: 15px; padding: 10px; background: white; border: 1px solid #eee; border-radius: 4px; }
+    #number { font-size: 1.5em; font-weight: bold; color: #28a745; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Generator Angka Acak Kustom</h2>
+    <p class="text-muted">Masukkan rentang batas angka acak yang ingin Anda hasilkan:</p>
+    <div class="inputs">
+      <label for="minVal">Minimal: </label>
+      <input type="number" id="minVal" value="1">
+      &nbsp;
+      <label for="maxVal">Maksimal: </label>
+      <input type="number" id="maxVal" value="100">
+    </div>
+    <button onclick="generateRandom()">Hasilkan Angka</button>
+    <div class="result">
+      <h3>Angka Acak: <span id="number">?</span></h3>
+      <p id="details" class="text-muted" style="font-size: 0.9em; margin-bottom: 0;"></p>
+    </div>
+  </div>
+  
+  <script>
+    function generateRandom() {
+      var min = parseInt(document.getElementById("minVal").value);
+      var max = parseInt(document.getElementById("maxVal").value);
+      
+      if (isNaN(min) || isNaN(max)) {
+        alert("Batas minimal dan maksimal harus berupa angka!");
+        return;
+      }
+      if (min >= max) {
+        alert("Batas minimal harus lebih kecil dari batas maksimal!");
+        return;
+      }
+      
+      // Rumus untuk range acak kustom: Math.floor(Math.random() * (max - min + 1)) + min
+      var rawRandom = Math.random();
+      var range = max - min + 1;
+      var randomInt = Math.floor(rawRandom * range) + min;
+      
+      document.getElementById("number").innerText = randomInt;
+      document.getElementById("details").innerHTML = 
+        "Random mentah: <code>" + rawRandom.toFixed(5) + "</code><br>" + 
+        "Range jangkauan (max-min+1): <code>" + range + "</code>";
+    }
+  </script>
+</body>
+</html>
