@@ -12,9 +12,13 @@ Selamat datang di repositori portofolio digital Praktikum Pemrograman Web. Repos
    - Berisi latihan HTML dasar, elemen teks, gambar, audio, dan video.
 2. [Modul 2: CSS & Layouting Responsive](./praktikum%20modul%202)
    - Berisi latihan properti warna, text, selector, box model, flexbox, grid, dan responsive CSS.
-3. [Modul 3: Pemrograman Web Lanjutan](./praktikum%20modul%203)
-   - Berisi latihan dan tugas pemrograman web modul 3.
-4. [Modul 4 - 6: JavaScript & Backend Integration](#) *(Akan diupdate)*
-   - Modul lanjutan pemrograman web.
-5. [Modul 7: Version Control System (Git & GitHub)](#)
-   - Manajemen repositori, branching, pull request, dan portofolio digital.
+3. [Modul 3: Pemrograman Web Lanjutan (Bootstrap)](./praktikum%20modul%203)
+   - Berisi latihan dan tugas komponen UI Bootstrap, navbar, card, modal, dan layout grid.
+4. [Modul 4: Dasar JavaScript & Interaktivitas Web](./praktikum%20modul%204)
+   - Berisi latihan penanganan event, manipulasi DOM, kalkulator, todo list, dan validasi form.
+5. [Modul 5: Pemrograman Server-Side dengan PHP](./praktikum%20modul%205)
+   - Berisi sintaks dasar PHP, variabel, fungsi, percabangan, perulangan, dan tugas buku tamu.
+6. [Modul 6: Integrasi Database MySQL & CRUD](./praktikum%20modul%206)
+   - Berisi koneksi database MySQL, operasi Create, Read, Update, Delete (CRUD) data toko & perusahaan.
+7. [Modul 7: Version Control System (Git & GitHub)](./)
+   - Manajemen repositori, branching, pull request, dan pembuatan portofolio digital.
